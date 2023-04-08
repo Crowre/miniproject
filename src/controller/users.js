@@ -15,12 +15,21 @@ const getAllMerchant = async (req, res) => {
     }
 
 };
-// const createNewMerchant = (req, res) => {
-//     console.log(req.body);
-//     res.json({
-//         message: 'create new user success',
-//     })
-// };
+const createNewMerchant = async (req, res) => {
+    const { body } = req
+    try {
+        await merchantModel.createNewMerchant(body)
+        res.json({
+            message: 'create new user success',
+            data: body
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'server error',
+            serverMessage: error,
+        })
+    }
+};
 const updateMerchant = (req, res) => {
     const { idUser } = req.params
     console.log('idUser:', idUser);
@@ -45,7 +54,7 @@ const deleteMerchant = (req, res) => {
 };
 module.exports = {
     getAllMerchant,
-    // createNewMerchant,
+    createNewMerchant,
     updateMerchant,
     deleteMerchant
 };

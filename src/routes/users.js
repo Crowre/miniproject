@@ -5,7 +5,7 @@ const UserController = require('../controller/users.js')
 const router = express.Router()
 
 //create db - post method
-// router.post('/', UserController.createNewMerchant)
+router.post('/', UserController.createNewMerchant)
 
 //read db - get method
 router.get('/', UserController.getAllMerchant)
