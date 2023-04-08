@@ -30,31 +30,25 @@ const createNewMerchant = async (req, res) => {
         })
     }
 };
-const updateMerchant = (req, res) => {
+
+const deleteMerchant = async (req, res) => {
     const { idUser } = req.params
-    console.log('idUser:', idUser);
-    res.json({
-        message: "update user success",
-        data: req.body,
-    })
-};
-const deleteMerchant = (req, res) => {
-    const { idUser } = req.params
-    res.json({
-        message: "delete user success",
-        data: {
-            id: idUser,
-            name: "wildan",
-            password: 'wildan',
-            address: "tabing,padang",
-            join_date: "2019-12-09",
-            phone_number: "081254457667"
-        }
-    })
+    try {
+        await merchantModel.deleteMerchant(idUser)
+        res.json({
+            message: "delete user success",
+            data: null
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'server error',
+            serverMessage: error,
+        })
+    }
+
 };
 module.exports = {
     getAllMerchant,
     createNewMerchant,
-    updateMerchant,
     deleteMerchant
 };
