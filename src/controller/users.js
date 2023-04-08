@@ -17,9 +17,17 @@ const getAllMerchant = async (req, res) => {
 };
 const createNewMerchant = async (req, res) => {
     const { body } = req
+
+    if (!body.password || !body.name || !body.address || !body.join_date || !body.phone_number) {
+        return res.status(400).json({
+            message: 'data yang dimasukkan kurang atau salah',
+            data: null
+        })
+    }
+
     try {
         await merchantModel.createNewMerchant(body)
-        res.json({
+        res.status(201).json({
             message: 'create new user success',
             data: body
         })
